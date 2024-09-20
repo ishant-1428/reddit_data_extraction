@@ -5,7 +5,7 @@ const cors = require("cors");
 require("dotenv").config();
 
 const app = express();
-const PORT = process.env.PORT || 500;
+const PORT = process.env.PORT || 5000;
 
 app.use(cors());
 
@@ -17,11 +17,12 @@ app.get("/api/reddit/recent/:subreddit", async (req, res) => {
     );
     res.json(response.data);
   } catch (error) {
+    console.error("Reddit API error:", error);
     res.status(500).json({ error: "Failed to fetch data from Reddit" });
   }
 });
 
-app.get("/api/reddit/:subreddit/topalltime", async (req, res) => {
+app.get("/api/reddit/topalltime/:subreddit", async (req, res) => {
   const subreddit = req.params.subreddit;
   try {
     const response = await axios.get(
@@ -29,7 +30,8 @@ app.get("/api/reddit/:subreddit/topalltime", async (req, res) => {
     );
     res.json(response.data);
   } catch (error) {
-    req.status(500).json({ error: "Failed to fetch data from Reddit" });
+    console.error("Reddit API error:", error);
+    res.status(500).json({ error: "Failed to fetch data from Reddit" });
   }
 });
 

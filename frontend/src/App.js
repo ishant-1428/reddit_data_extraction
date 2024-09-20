@@ -11,7 +11,7 @@ function App() {
     e.preventDefault();
     try {
       const response = await axios.get(
-        `http://localhost:500/api/reddit/recent/${subreddit}`
+        `http://localhost:5000/api/reddit/recent/${subreddit}`
       );
       setPosts(response.data.data.children);
       console.log("Data::::", response?.data?.data?.children);
@@ -25,7 +25,7 @@ function App() {
     e.preventDefault();
     try {
       const response = await axios.get(
-        `http://localhost:500/api/reddit/${subreddit}/topalltime`
+        `http://localhost:5000/api/reddit/topalltime/${subreddit}`
       );
       setPosts(response.data?.data?.children);
     } catch (error) {
